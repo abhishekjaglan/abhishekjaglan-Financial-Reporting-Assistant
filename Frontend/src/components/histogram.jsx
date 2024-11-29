@@ -4,11 +4,11 @@ import axios from 'axios';
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 
 ChartJS.register(CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
 );
 
 const Histogram = () => {
@@ -38,10 +38,10 @@ const Histogram = () => {
     };
 
     fetchData();
-    const interval = setInterval(fetchData,20 * 60 * 1000);
+    const interval = setInterval(fetchData, 20 * 60 * 1000);
 
     return () => clearInterval(interval);
-    
+
   }, []);
 
   const processDataForHistogram = (data) => {
@@ -73,41 +73,41 @@ const Histogram = () => {
 
   return (
     <div style={{ width: '650px', height: '450px', backgroundColor: 'transparent' }} className="flex flex-col justify-center items-center w-1/3 bg-green-800">
-      <Bar 
-      data={histogramData} 
-      options={{
-        maintainAspectRatio: false,
-        scales: {
-          x: {
-            barPercentage: 1, // Adjusts the width of the bars
-            categoryPercentage: 0.9, // Adjusts the spacing between bars
-          },
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Frequency Of Total Jobs', // Y-axis label
+      <Bar
+        data={histogramData}
+        options={{
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              barPercentage: 1, // Adjusts the width of the bars
+              categoryPercentage: 0.9, // Adjusts the spacing between bars
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Frequency Of Total Jobs', // Y-axis label
+              },
             },
           },
-        },
-        plugins: {
-          tooltip: {
-            callbacks: {
-              // Customize the tooltip title
-              title: function(tooltipItems) {
-                // Assuming the label for each bar is the job_id
-                return `Job ID: ${tooltipItems[0].label}`;
-              },
-              // Customize the tooltip label
-              label: function(context) {
-                // Display additional information such as the frequency
-                return `Frequency: ${context.raw}`;
+          plugins: {
+            tooltip: {
+              callbacks: {
+                // Customize the tooltip title
+                title: function (tooltipItems) {
+                  // Assuming the label for each bar is the job_id
+                  return `Job ID: ${tooltipItems[0].label}`;
+                },
+                // Customize the tooltip label
+                label: function (context) {
+                  // Display additional information such as the frequency
+                  return `Frequency: ${context.raw}`;
+                }
               }
             }
           }
-        }
-      }}
-    />
+        }}
+      />
     </div>
   );
 }

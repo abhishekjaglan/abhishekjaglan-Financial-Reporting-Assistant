@@ -30,18 +30,24 @@ export default function Sidebar() {
     // },[]);
 
     return (
-        <>
-            <div className="flex h-screen">
-                <div className="bg-green-800 w-1/8 text-lg font-semibold">
-                    <div className="underline underline-offset-1 block p-4">Home</div>
-                    <div className="underline underline-offset-1 block p-4">News</div>
-                    <div className="underline underline-offset-1 block p-4">Contact</div>
-                    <div className="underline underline-offset-1 block p-4">About</div>
-                </div>
-                {/* <div className="flex justify-center bg-black w-full text-white">
-                    <Table isLoading={isLoading} data={data}/> 
-                </div> */}
+        <div className={`fixed top-0 left-0 h-full bg-green-800 w-64 transform transition-transform duration-300 ease-in-out ${props.isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div className="flex flex-col text-white text-lg font-semibold">
+                <Link to="/" className="hover:bg-green-700 underline underline-offset-1 block p-4">
+                    Home
+                </Link>
+                <Link to="/news" className="hover:bg-green-700 underline underline-offset-1 block p-4">
+                    News
+                </Link>
+                <Link to="/contact" className="hover:bg-green-700 underline underline-offset-1 block p-4">
+                    Contact
+                </Link>
+                <Link to="/about" className="hover:bg-green-700 underline underline-offset-1 block p-4">
+                    About
+                </Link>
             </div>
-        </>
+            <div className={`fixed inset-0 bg-black bg-opacity-50 z-[-1] transition-opacity duration-300 ${props.isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+                onClick={props.onClose}>
+            </div>
+        </div>
     )
 }
